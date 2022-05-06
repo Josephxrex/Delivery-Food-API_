@@ -1,5 +1,5 @@
 import Order from "../../domain-layer/entities/Order";
-import DatabaseConnection from '../../persistence-layer/DatabaseConnection';
+import DatabaseConnection from '../../persistance-layer/DatabaseConnection'
 import IAsyncTask from "./IAsyncTask";
 
 export default class FindOrderTask implements IAsyncTask<Order>{
@@ -14,7 +14,7 @@ export default class FindOrderTask implements IAsyncTask<Order>{
         const databaseConnection = await DatabaseConnection.getInstance();
         const orderRepository = databaseConnection.getRepository(Order);
 
-        const order = await orderRepository.findOneBy({ id: this.orderId });
+        const order = await orderRepository.findOneBy({ idOrder:this.orderId});
 
         if (!order) {
           throw new Error('Car not found.');

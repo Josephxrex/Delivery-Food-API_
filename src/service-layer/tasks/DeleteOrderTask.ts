@@ -1,6 +1,6 @@
 import IAsyncTask from "./IAsyncTask";
 import Order from "../../domain-layer/entities/Order";
-import DatabaseConnection from "../../persistence-layer/DatabaseConnection";
+import DatabaseConnection from '../../persistance-layer/DatabaseConnection'
 
 export default class DeleteCarTask implements IAsyncTask<void> {
     private orderId: number;

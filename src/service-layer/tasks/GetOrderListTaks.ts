@@ -1,5 +1,5 @@
 import Order from '../../domain-layer/entities/Order';
-import DatabaseConnection from '../../persistence-layer/DatabaseConnection';
+import DatabaseConnection from '../../persistance-layer/DatabaseConnection'
 import IAsyncTask from './IAsyncTask';
 
 export default class GetOrderListTask implements IAsyncTask<Order[]> {

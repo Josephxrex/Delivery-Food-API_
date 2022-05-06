@@ -1,6 +1,6 @@
-import Order from "../../domain-layer/enetities/Order";
-import DatabaseConnection from "../../persistence-layer/DatabaseConnection";
-import FindOrderTask from "./FindCarTask";
+import Order from "../../domain-layer/entities/Order";
+import DatabaseConnection from '../../persistance-layer/DatabaseConnection'
+import FindOrderTask from "./FindOrderTaks";
 import IAsyncTask from "./IAsyncTask";
 
 export type updatedOrderData = {
