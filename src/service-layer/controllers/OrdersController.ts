@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import AddOrderTask, { AddOrderData } from '../tasks/AddOrderTask';
 import DeleteOrderTask from '../tasks/DeleteOrderTask';
-import FindOrderTask from '../tasks/FindOrderTask';
-import GetOrderListTask from '../tasks/GetOrderListTask';
-import UpdateOrderTask, { UpdateOrderData } from '../tasks/UpdateOrderTask';
+import FindOrderTask from '../tasks/FindOrderTaks';
+import GetOrderListTask from '../tasks/GetOrderListTaks';
+import UpdateOrderTask, { updateOrderData } from '../tasks/UpdateOrderTask';
 import BaseController from './BaseController';
 
 export default class OrdersController extends BaseController {
@@ -64,7 +64,7 @@ export default class OrdersController extends BaseController {
 
   private async updateOrder(req: Request, res: Response): Promise<void> {
     try {
-      const orderData = <UpdateOrderData>req.body;
+      const orderData = <updateOrderData>req.body;
 
       const updateOrderTask = new UpdateOrderTask(orderData);
 
