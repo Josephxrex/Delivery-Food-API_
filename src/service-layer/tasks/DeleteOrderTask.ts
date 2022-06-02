@@ -12,7 +12,6 @@ export default class DeleteCarTask implements IAsyncTask<void> {
   public async execute(): Promise<void> {
     const databaseConnection = await DatabaseConnection.getInstance();
     const orderRepository = databaseConnection.getRepository(Order);
-
     await orderRepository.delete(this.orderId);
   }
 
