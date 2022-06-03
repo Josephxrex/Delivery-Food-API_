@@ -4,7 +4,7 @@ import Order from "../../src/domain-layer/entities/Order";
 import expect from "expect";
 import {updatedOrderData} from "../../src/service-layer/tasks/UpdateOrderTask";
 
-export default class UpdateCarTaskMock {
+export default class UpdateOrderTaskMock {
   private readonly instanceStub: SinonStubbedInstance<updateOrderTaskModule.default>;
 
   private readonly constructorStub: SinonStub;
@@ -27,7 +27,7 @@ export default class UpdateCarTaskMock {
     this.instanceStub.execute.throws(new Error(message));
   }
 
-  public expectExecuteWasCalledOnceWithCarData(OrderData:updatedOrderData): void {
+  public expectExecuteWasCalledOnceWithOrderData(OrderData:updatedOrderData): void {
     expect(this.constructorStub.calledOnce).toBe(true);
     const call = this.constructorStub.getCall(0);
     expect(call.args[0]).toEqual(OrderData);
