@@ -7,6 +7,7 @@ import GetOrderListTaskMock from './test-doubles/GetOrderListTaskMock';
 import DeleteOrderTaskMock from './test-doubles/DeleteOrderTaskMock';
 import UpdateOrderTaskMock from './test-doubles/UpdateOrderTaskMock';
 import {updatedOrderData} from "../src/service-layer/tasks/UpdateOrderTask";
+import FindOrderTaskMock from './test-doubles/FindOrderTaskMock';
 import AddOrderTaskMock from './test-doubles/AddOrderTaskMock';
 
 
@@ -167,9 +168,49 @@ describe('App Test',() => {
           .expect(500);
   
         addOrderTaskMock.expectExecuteWasCalledOnceWithOrderData(OrderData);
-      });
-      });
-     context('Find Order endpoint tests', () => {
+      }); 
+    
+    context('Find Order endpoint tests', () => {
+        
+        let findOrderTaskMock: FindOrderTaskMock;
+        
+        const orderId = 1;
+        const order = new Order(orderId, 'Cocho','Queso','Mediana','Caca',5,'spuerk')
+
+        beforeEach(() => {
+          findOrderTaskMock = new FindOrderTaskMock(sandbox);
+        });
+
+        it('should respond 200 OK with a car', async () => {
+          findOrderTaskMock.withExecuteReturning(order);
+
+          const response = await request(app)
+            .get(`/orders/${orderId}`)
+            .expect(200)
+
+            expect(response.body).toEqual(order);
+            findOrderTaskMock.expectExecuteWasCalledOnceForOrder(orderId);
+        });
+
+        it('should respond 404 NotFound if order does not exist', async () => {
+          findOrderTaskMock.withExecuteThrowingNotFoundError();
+    
+          await request(app)
+            .get(`/orders/${orderId}`)
+            .expect(404);
+    
+          findOrderTaskMock.expectExecuteWasCalledOnceForOrder(orderId);
+        });
+    
+        it('should handle unknown errors and respond 500 Internal Server Error', async () => {
+          findOrderTaskMock.withExecuteThrowingError('You shall not pass!');
+    
+          await request(app)
+            .get(`/orders/${orderId}`)
+            .expect(500);
+    
+          findOrderTaskMock.expectExecuteWasCalledOnceForOrder(orderId);
+        });
 
       });
   
