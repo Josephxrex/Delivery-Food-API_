@@ -4,10 +4,11 @@ import sinon from 'sinon';
 import app from '../src/app';
 import Order from '../src/domain-layer/entities/Order';
 import GetOrderListTaskMock from './test-doubles/GetOrderListTaskMock';
-//import DeleteOrderTaskMock from './test-doubles/DeleteOrderTaskMock';
+import DeleteOrderTaskMock from './test-doubles/DeleteOrderTaskMock';
 import UpdateOrderTaskMock from './test-doubles/UpdateOrderTaskMock';
 import {updatedOrderData} from "../src/service-layer/tasks/UpdateOrderTask";
 import FindOrderTaskMock from './test-doubles/FindOrderTaskMock';
+import AddOrderTaskMock from './test-doubles/AddOrderTaskMock';
 
 
 
@@ -68,7 +69,7 @@ describe('App Test',() => {
         updateOrderTaskMock = new UpdateOrderTaskMock(sandbox);
       });
   
-      it('should respond 200 OK with a car', async () => {
+      it('should respond 200 OK with an Order', async () => {
         updateOrderTaskMock.withExecuteReturning(order);
   
         const response = await request(app)
@@ -78,10 +79,10 @@ describe('App Test',() => {
           .expect(200);
   
         expect(response.body).toEqual(order);
-        updateOrderTaskMock.expectExecuteWasCalledOnceWithCarData(OrderData);
+        updateOrderTaskMock.expectExecuteWasCalledOnceWithOrderData(OrderData);
       });
   
-      it('should respond 404 NotFound if car does not exist', async () => {
+      it('should respond 404 NotFound if Order does not exist', async () => {
         updateOrderTaskMock.withExecuteThrowingNotFoundError();
   
         await request(app)
@@ -90,7 +91,7 @@ describe('App Test',() => {
           .send(OrderData)
           .expect(404);
   
-        updateOrderTaskMock.expectExecuteWasCalledOnceWithCarData(OrderData);
+        updateOrderTaskMock.expectExecuteWasCalledOnceWithOrderData(OrderData);
       });
   
       it('should handle unknown errors and respond 500 Internal Server Error', async () => {
@@ -102,14 +103,73 @@ describe('App Test',() => {
           .send(OrderData)
           .expect(500);
   
-        updateOrderTaskMock.expectExecuteWasCalledOnceWithCarData(OrderData);
+        updateOrderTaskMock.expectExecuteWasCalledOnceWithOrderData(OrderData);
       });
       }); 
     context('Delete Order endpoint tests', () => {
-    
+ 
+      let deleteOrderTaskMock:  DeleteOrderTaskMock;
+      
+     beforeEach(() => {
+       deleteOrderTaskMock = new DeleteOrderTaskMock(sandbox);
+    });
+
+    const idOrder = 1
+
+    it('should respond 200 OK and respond with a list of Orders', async () => {
+          deleteOrderTaskMock.withExecuteReturning();
+          const response = await request(app)
+            .delete(`/orders/${idOrder}`)
+            .expect(200);
+        
+        deleteOrderTaskMock.expectExecuteWasCalledOnce();
+      });
+  
+      it('should handle unknown errors and respond with 500 Internal Server Error', async () => {
+
+       deleteOrderTaskMock.withExecuteThrowingError('iuuuughhhhhhhhh.. says pigy');
+        await request(app)
+         .delete(`/orders/${idOrder}`)
+          .expect(500);
+          deleteOrderTaskMock.expectExecuteWasCalledOnce();
+      });
       });
     context('Add Order endpoint tests', () => {
+        let addOrderTaskMock: AddOrderTaskMock;
+  
+        const OrderData: updatedOrderData = {idOrder:1,clientName:
+          "pigy",pizzaName:"sarten",size:"mediana",ingredients:"peperoni,panchoas,tocino",price:150.0,soda:"Cocola"} 
+          const order = new Order(OrderData.idOrder, OrderData.clientName, OrderData.pizzaName,OrderData.size,OrderData.ingredients,OrderData.price,OrderData.soda);
+  
+      beforeEach(() => {
+        addOrderTaskMock = new AddOrderTaskMock(sandbox);
       });
+  
+      it('should respond 200 OK with a newly created order', async () => {
+        addOrderTaskMock.withExecuteReturning(order);
+  
+        const response = await request(app)
+          .post('/orders')
+          .set('Content-Type', 'application/json')
+          .send(OrderData)
+          .expect(200);
+  
+        expect(response.body).toEqual(order);
+        addOrderTaskMock.expectExecuteWasCalledOnceWithOrderData(OrderData);
+      });
+  
+      it('should handle unknown errors and respond with 500 Internal Server Error', async () => {
+        addOrderTaskMock.withExecuteThrowingError('A new order was not added');
+  
+        await request(app)
+          .post('/orders')
+          .set('Content-Type', 'application/json')
+          .send(OrderData)
+          .expect(500);
+  
+        addOrderTaskMock.expectExecuteWasCalledOnceWithOrderData(OrderData);
+      }); 
+    
     context('Find Order endpoint tests', () => {
         
         let findOrderTaskMock: FindOrderTaskMock;

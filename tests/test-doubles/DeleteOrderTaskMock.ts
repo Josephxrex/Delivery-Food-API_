@@ -16,7 +16,7 @@ export default class DeleteOrderTaskMock {
     }
   
     public withExecuteReturning(): void {
-    this.instanceStub.execute();
+    this.instanceStub.execute.returns(Promise.resolve());
     }
   
     public withExecuteThrowingError(message: string): void {
