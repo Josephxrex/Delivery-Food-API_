@@ -32,6 +32,6 @@
     "express": "^4.17.3",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.4"
+    "typeorm": "^0.3.6"
   }
 }
