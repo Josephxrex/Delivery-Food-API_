@@ -1,12 +1,12 @@
 import request from 'supertest'
 import  expect from 'expect';
 import sinon from 'sinon';
-import app from '../src/app';
-import Order from '../src/domain-layer/entities/Order';
+import app from '../../../src/app';
+import Order from '../../../src/domain-layer/entities/Order';
 import GetOrderListTaskMock from './test-doubles/GetOrderListTaskMock';
 import DeleteOrderTaskMock from './test-doubles/DeleteOrderTaskMock';
 import UpdateOrderTaskMock from './test-doubles/UpdateOrderTaskMock';
-import {updatedOrderData} from "../src/service-layer/tasks/UpdateOrderTask";
+import {updatedOrderData} from "../../../src/service-layer/tasks/UpdateOrderTask";
 import FindOrderTaskMock from './test-doubles/FindOrderTaskMock';
 import AddOrderTaskMock from './test-doubles/AddOrderTaskMock';
 
@@ -215,4 +215,4 @@ describe('App Test',() => {
       });
   
     });
-    
+  });

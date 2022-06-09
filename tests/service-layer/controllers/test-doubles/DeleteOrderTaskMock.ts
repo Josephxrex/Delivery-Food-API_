@@ -1,6 +1,6 @@
 import { SinonSandbox, SinonStub, SinonStubbedInstance } from "sinon";
-import * as deleteOrderTaskModule from "../../src/service-layer/tasks/DeleteOrderTask";
-import Order from "../../src/domain-layer/entities/Order";
+import * as deleteOrderTaskModule from "../../../../src/service-layer/tasks/DeleteOrderTask";
+import Order from "../../../../src/domain-layer/entities/Order";
 import expect from "expect";
 
 

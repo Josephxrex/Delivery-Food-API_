@@ -1,10 +1,10 @@
 import { SinonSandbox, SinonStub, SinonStubbedInstance } from "sinon";
-import * as updateOrderTaskModule from "../../src/service-layer/tasks/UpdateOrderTask";
-import Order from "../../src/domain-layer/entities/Order";
+import * as updateOrderTaskModule from "../../../../src/service-layer/tasks/UpdateOrderTask";
+import Order from "../../../../src/domain-layer/entities/Order";
 import expect from "expect";
-import {updatedOrderData} from "../../src/service-layer/tasks/UpdateOrderTask";
+import {updatedOrderData} from "../../../../src/service-layer/tasks/UpdateOrderTask";
 
-export default class UpdateOrderTaskMock {
+export default class UpdateCarTaskMock {
   private readonly instanceStub: SinonStubbedInstance<updateOrderTaskModule.default>;
 
   private readonly constructorStub: SinonStub;

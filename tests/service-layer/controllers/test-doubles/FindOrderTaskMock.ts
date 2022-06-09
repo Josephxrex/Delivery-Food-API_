@@ -1,6 +1,6 @@
 import { SinonSandbox, SinonStub, SinonStubbedInstance } from "sinon";
-import * as findOrderTaskModule from "../../src/service-layer/tasks/FindOrderTaks"
-import Order from "../../src/domain-layer/entities/Order";
+import * as findOrderTaskModule from "../../../../src/service-layer/tasks/FindOrderTaks"
+import Order from "../../../../src/domain-layer/entities/Order";
 import expect from "expect";
 
 export default class FindOrderTaskMock {
