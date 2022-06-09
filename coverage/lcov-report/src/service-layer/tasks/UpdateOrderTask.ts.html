@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.52% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.52% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -124,28 +124,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Order from "../../domain-layer/entities/Order";
 import DatabaseConnection from '../../persistance-layer/DatabaseConnection'
@@ -165,29 +165,29 @@ export type updatedOrderData = {
 export default class UpdateOrderTask implements IAsyncTask&lt;Order&gt;{
     private updatedOrderData: updatedOrderData;
 &nbsp;
-<span class="fstat-no" title="function not covered" >    public constructor (O</span>rderData: updatedOrderData){
-<span class="cstat-no" title="statement not covered" >        this.updatedOrderData = OrderData;</span>
+    public constructor (OrderData: updatedOrderData){
+        this.updatedOrderData = OrderData;
     }
 &nbsp;
-    public async <span class="fstat-no" title="function not covered" >execute(</span>): Promise&lt;Order&gt;{
+    public async execute(): Promise&lt;Order&gt;{
 &nbsp;
-        const getOrderTask = <span class="cstat-no" title="statement not covered" >new FindOrderTask(this.updatedOrderData.idOrder)</span>
+        const getOrderTask = new FindOrderTask(this.updatedOrderData.idOrder)
 &nbsp;
-        const order = <span class="cstat-no" title="statement not covered" >await getOrderTask.execute();</span>
+        const order = await getOrderTask.execute();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        order.clientName = this.updatedOrderData.clientName;</span>
-<span class="cstat-no" title="statement not covered" >        order.pizzaName = this.updatedOrderData.pizzaName;</span>
-<span class="cstat-no" title="statement not covered" >        order.size = this.updatedOrderData.size;</span>
-<span class="cstat-no" title="statement not covered" >        order.ingredients = this.updatedOrderData.ingredients;</span>
-<span class="cstat-no" title="statement not covered" >        order.price = this.updatedOrderData.price;</span>
-<span class="cstat-no" title="statement not covered" >        order.soda = this.updatedOrderData.soda;</span>
+        order.clientName = this.updatedOrderData.clientName;
+        order.pizzaName = this.updatedOrderData.pizzaName;
+        order.size = this.updatedOrderData.size;
+        order.ingredients = this.updatedOrderData.ingredients;
+        order.price = this.updatedOrderData.price;
+        order.soda = this.updatedOrderData.soda;
 &nbsp;
-        const databaseConnection = <span class="cstat-no" title="statement not covered" >await DatabaseConnection.getInstance();</span>
-        const orderRepository = <span class="cstat-no" title="statement not covered" >databaseConnection.getRepository(Order);</span>
+        const databaseConnection = await DatabaseConnection.getInstance();
+        const orderRepository = databaseConnection.getRepository(Order);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        orderRepository.save(order);</span>
+        orderRepository.save(order);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return order;</span>
+        return order;
     }
 }</pre></td></tr></table></pre>
 
@@ -196,7 +196,7 @@ export default class UpdateOrderTask implements IAsyncTask&lt;Order&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 09 2022 15:20:42 GMT-0500 (hora de verano central)
+                at Thu Jun 09 2022 18:12:24 GMT-0500 (hora de verano central)
             </div>
         <script src="../../../prettify.js"></script>
         <script>
